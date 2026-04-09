@@ -6,6 +6,8 @@ spring:
     import: optional:file:.env[.properties]
   application:
     name: movie_review
+  mvc:
+    static-path-pattern: /static/**
 
   #  DB
   datasource:
