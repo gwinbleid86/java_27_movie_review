@@ -3,6 +3,7 @@ package kg.attractor.movie_review.controller;
 import kg.attractor.movie_review.exception.NotFoundEntryException;
 import kg.attractor.movie_review.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,8 @@ public class MovieController {
     private final MovieService movieService;
 
     @GetMapping
-    public String getMovieList(Model model) {
-        model.addAttribute("movies", movieService.getMovies());
+    public String getMovieList(Model model, Pageable pageable) {
+        model.addAttribute("movies", movieService.getMovies(pageable));
         return "movies/movies";
     }
 

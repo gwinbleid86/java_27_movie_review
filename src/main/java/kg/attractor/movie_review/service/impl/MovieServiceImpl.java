@@ -10,6 +10,8 @@ import kg.attractor.movie_review.repository.MovieRepository;
 import kg.attractor.movie_review.service.DirectorService;
 import kg.attractor.movie_review.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,8 +26,8 @@ public class MovieServiceImpl implements MovieService {
     private final MovieImageDao movieImageDao;
 
     @Override
-    public List<MovieDto> getMovies() {
-        List<Movie> list = movieRepository.findAll();
+    public List<MovieDto> getMovies(Pageable pageable) {
+        Page<Movie> list = movieRepository.findAll(pageable);
         List<MovieDto> movies = new ArrayList<>();
 
         list.forEach(e -> {

@@ -3,6 +3,7 @@ package kg.attractor.movie_review.controller.api;
 import kg.attractor.movie_review.dto.MovieDto;
 import kg.attractor.movie_review.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,8 @@ public class ApiMovieController {
     private final MovieService movieService;
 
     @GetMapping
-    public ResponseEntity<List<MovieDto>> getMovies() {
-        return ResponseEntity.ok(movieService.getMovies());
+    public ResponseEntity<List<MovieDto>> getMovies(Pageable pageable) {
+        return ResponseEntity.ok(movieService.getMovies(pageable));
     }
 
     @PostMapping
