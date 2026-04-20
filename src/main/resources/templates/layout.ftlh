@@ -41,10 +41,43 @@
                     </li>
                 </ul>
             </div>
-            <a href="/auth/login"
-               class="btn alert-success m-2">Login</a>
-            <a href="/auth/register"
-               class="btn alert-info m-2">Register</a>
+            <#assign known = SPRING_SECURITY_CONTEXT?? >
+            <#if known>
+                <#assign
+                user = SPRING_SECURITY_CONTEXT.authentication.principal
+                name = user.getUsername()
+                >
+                <#if user??>
+                    <a href="/profile/${name}" class="text-light m-2 m-sm-0">
+                        Hello ${name}:
+
+                        <#list user.authorities as auth>
+                            <span class="text-danger">${auth}</span>
+                            <#if auth?has_next>
+                                /
+                            </#if>
+                        </#list>
+                    </a>
+                    <form action="auth/logout" method="post">
+                        <#if _csrf??>
+                            <input
+                                    type="hidden"
+                                    name="${(_csrf.parameterName)!'csrf-param-name'}"
+                                    value="${(_csrf.token)!'csrf-token'}"
+                            >
+                        </#if>
+                        <button type="submit" class="btn alert-danger m-2"
+                                id="logout">
+                            Logout
+                        </button>
+                    </form>
+                </#if>
+            <#else>
+                <a href="/auth/login"
+                   class="btn alert-success m-2">Login</a>
+                <a href="/auth/register"
+                   class="btn alert-info m-2">Register</a>
+            </#if>
         </div>
     </nav>
 
@@ -53,6 +86,6 @@
     </div>
 
     </body>
-    </html>
+</html>
 
 </#macro>

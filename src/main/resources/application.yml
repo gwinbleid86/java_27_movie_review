@@ -8,6 +8,8 @@ spring:
     name: movie_review
   mvc:
     static-path-pattern: /static/**
+  freemarker:
+    expose-session-attributes: true
 
   #  DB
   datasource:

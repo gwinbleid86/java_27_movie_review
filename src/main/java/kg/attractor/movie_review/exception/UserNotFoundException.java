@@ -1,6 +1,8 @@
 package kg.attractor.movie_review.exception;
 
-public class UserNotFoundException extends NotFoundEntryException {
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public class UserNotFoundException extends UsernameNotFoundException {
     public UserNotFoundException() {
         super("User not found");
     }
