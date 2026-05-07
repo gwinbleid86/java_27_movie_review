@@ -28,17 +28,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/movies">Movies</a>
+                        <a class="nav-link" aria-current="page" href="/"><@spring.message 'layout.nav.home'/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" aria-current="page"
+                           href="/movies"><@spring.message 'layout.nav.movies'/></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+                    <#--                    <li class="nav-item">-->
+                    <#--                        <a class="nav-link" href="#">Features</a>-->
+                    <#--                    </li>-->
+                    <#--                    <li class="nav-item">-->
+                    <#--                        <a class="nav-link" href="#">Pricing</a>-->
+                    <#--                    </li>-->
+                    <#--                    <li class="nav-item">-->
+                    <#--                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+                    <#--                    </li>-->
                 </ul>
             </div>
             <#assign known = SPRING_SECURITY_CONTEXT?? >
@@ -49,7 +53,7 @@
                 >
                 <#if user??>
                     <a href="/profile/${name}" class="text-light m-2 m-sm-0">
-                        Hello ${name}:
+                        <@spring.message 'layout.nav.hello'/> ${name}:
 
                         <#list user.authorities as auth>
                             <span class="text-danger">${auth}</span>
@@ -68,16 +72,26 @@
                         </#if>
                         <button type="submit" class="btn alert-danger m-2"
                                 id="logout">
-                            Logout
+                            <@spring.message 'layout.nav.logout'/>
                         </button>
                     </form>
                 </#if>
             <#else>
                 <a href="/auth/login"
-                   class="btn alert-success m-2">Login</a>
+                   class="btn alert-success m-2"><@spring.message 'layout.nav.login'/></a>
                 <a href="/auth/register"
-                   class="btn alert-info m-2">Register</a>
+                   class="btn alert-info m-2"><@spring.message 'layout.nav.register'/></a>
             </#if>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <@spring.message 'layout.nav.lang.change'/>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?lang=en"><@spring.message 'layout.nav.lang.en'/></a></li>
+                    <li><a class="dropdown-item" href="?lang=ru"><@spring.message 'layout.nav.lang.ru'/></a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
