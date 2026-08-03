@@ -1,9 +1,9 @@
 on:
-  workflow_dispatch:
-#  push:
-#    branches: ["main"]
-#  pull_request:
-#    branches: [ "main"]
+#  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 env:
   REGISTRY: ghcr.io
@@ -61,13 +61,14 @@ jobs:
 
     steps:
       - name: Connect to server via SSH and pull docker image
-        uses: appleboy/ssh-action@v1
+        uses: tiyee/action-ssh@v1.0.1
         with:
           host: ${{ secrets.SSH_HOST }}
+          port: 22
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.PAT }}
-          script: |
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          command: |
             cd ${{ secrets.WORK_DIR }}
             docker compose pull
-            docker compose up -d
+            docker compose up --force-recreate -d
             exit
