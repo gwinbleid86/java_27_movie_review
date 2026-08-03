@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           java-version: '21'
-          distribution: 'corretto'
+          distribution: 'temurin'
           cache: maven
 
       - name: Start Maven test & package
