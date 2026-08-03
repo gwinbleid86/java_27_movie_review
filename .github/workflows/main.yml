@@ -63,7 +63,7 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secret.SSH_HOST }}
-          username: ${{ SSH_USER }}
+          username: ${{ secret.SSH_USER }}
           key: ${{ secret.PAT }}
           script: |
             cd ${{ secret.WORK_DIR }}
