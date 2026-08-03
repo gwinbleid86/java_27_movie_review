@@ -1,5 +1,6 @@
 FROM openjdk:21-ea-slim
-COPY ./movie_review*.jar ./movie_review.jar
+RUN mkdir /app
+COPY ./movie_review*.jar ./app/movie_review.jar
 WORKDIR /app
 #COPY .env ./app/.env
 EXPOSE 8089
